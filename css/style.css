@@ -122,18 +122,17 @@ body {
   background-image: url("../assets/svg/play-next.svg");
 }
 
-/* Управление Аудио */
 .player__progress-contaner {
   width: 100%;
   height: 6px;
   border-radius: 5px;
   display: flex;
   align-items: center;
-  background: cornsilk;
+  background: lightgray;
   cursor: pointer;
 }
 .player__progress {
-  background-color: rgba(10, 4, 44, 0.5);
+  background-color: rgb(71, 71, 71);
   border-radius: 5px;
   height: 4px;
   width: 1%;
@@ -154,12 +153,12 @@ body {
   border-radius: 5px;
   display: flex;
   align-items: center;
-  background: cornsilk;
+  background: lightgray;
   cursor: pointer;
 }
 
 .sound__volume {
-  background-color: rgba(10, 4, 44, 0.5);
+  background-color: rgb(71, 71, 71);
   border-radius: 5px;
   height: 4px;
   width: 50%;
@@ -343,7 +342,7 @@ img {
   transition: transform 0.3s ease-in-out;
 }
 
-img:hover {
+.settings-on:hover {
   transform: rotate(90deg);
 }
 
