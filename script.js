@@ -534,3 +534,229 @@ function toggleQuotesVisibility() {
 function toggleTodoVisibility() {
   todoContainer.classList.toggle("hide-block");
 }
+
+let playNow = 0;
+let isPlay = false;
+let toggleVolume = true;
+let playNowName = document.querySelector(".player__currentTrack");
+const audioObj = [
+  {
+    title: "Aqua Caelestis",
+    src: "../assets/sounds/Aqua Caelestis.mp3",
+    duration: "00:58",
+  },
+  {
+    title: "River Flows In You",
+    src: "../assets/sounds/River Flows In You.mp3",
+    duration: "03:50",
+  },
+  {
+    title: "Ennio Morricone",
+    src: "../assets/sounds/Ennio Morricone.mp3",
+    duration: "00:58",
+  },
+  {
+    title: "Summer Wind",
+    src: "../assets/sounds/Summer Wind.mp3",
+    duration: "03:50",
+  },
+];
+
+const audioList = document.querySelector(".play-list");
+
+function AddAudioList() {
+  let fragmentAudioList = document.createDocumentFragment();
+  audioObj.forEach((el) => {
+    const li = document.createElement("li");
+    li.textContent = el.title;
+    li.classList.add("play-item");
+    fragmentAudioList.append(li);
+  });
+  audioList.append(fragmentAudioList);
+}
+AddAudioList();
+
+const playBtn = document.querySelector(".play-big");
+const playNext = document.querySelector(".play-next");
+const playPrev = document.querySelector(".play-prev");
+const audio = new Audio();
+
+function togglePlay() {
+  if (isPlay) {
+    stopTrack();
+  } else if (!isPlay) {
+    playTrack();
+  }
+}
+
+function stopTrack() {
+  isPlay = false;
+  playBtn.classList.toggle("pause");
+  audio.pause();
+}
+
+function playTrack() {
+  changeCurrentTrack();
+  let trackToPlay = audioObj[playNow].src;
+  isPlay = true;
+  playBtn.classList.toggle("pause");
+  audio.src = `${trackToPlay}`;
+  audio.currentTime = 0;
+  audio.play();
+}
+
+playNext.addEventListener("click", (e) => {
+  playNow += 1;
+
+  if (playNow >= audioObj.length) {
+    playNow = 0;
+  }
+  changeCurrentTrack();
+  document.querySelector(".item-active").classList.remove("item-active");
+  tracksInList[playNow].classList.add("item-active");
+  if (isPlay) {
+    let trackToPlay = audioObj[playNow].src;
+    audio.src = `${trackToPlay}`;
+    audio.play();
+  } else if (!isPlay) {
+    isPlay = true;
+    playBtn.classList.toggle("pause");
+    let trackToPlay = audioObj[playNow].src;
+    audio.src = `${trackToPlay}`;
+    audio.play();
+  }
+});
+
+playPrev.addEventListener("click", (e) => {
+  playNow -= 1;
+  if (playNow < 0) {
+    playNow = audioObj.length - 1;
+  }
+  changeCurrentTrack();
+  document.querySelector(".item-active").classList.remove("item-active");
+  tracksInList[playNow].classList.add("item-active");
+  if (isPlay) {
+    let trackToPlay = audioObj[playNow].src;
+    audio.src = `${trackToPlay}`;
+    audio.play();
+  } else if (!isPlay) {
+    isPlay = true;
+    playBtn.classList.toggle("pause");
+    let trackToPlay = audioObj[playNow].src;
+    audio.src = `${trackToPlay}`;
+    audio.play();
+  }
+});
+
+playBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  togglePlay();
+});
+
+const tracksInList = document.querySelectorAll(".play-item");
+tracksInList[0].classList.add("item-active");
+// продвинутый плеер
+let progressContainer = document.querySelector(".player__progress-contaner");
+let playerProgress = document.querySelector(".player__progress");
+
+function updateProgress(e) {
+  let CurrentProcent = (e.srcElement.currentTime / e.srcElement.duration) * 100;
+  playerProgress.style.width = `${CurrentProcent}%`;
+}
+
+audio.addEventListener("timeupdate", updateProgress);
+
+function setProgress(e) {
+  let width = this.clientWidth;
+  let clickX = e.offsetX;
+  audio.currentTime = (clickX / width) * audio.duration;
+}
+progressContainer.addEventListener("click", setProgress);
+
+function changeCurrentTrack() {
+  playNowName.textContent = audioObj[playNow].title;
+}
+
+//звук продвинутого плеера
+let soundProgressContainer = document.querySelector(
+  ".sound__progress-container"
+);
+
+let soundVolumeBar = document.querySelector(".sound__volume");
+
+let soundVolume = document.querySelector(".sound__volume");
+
+function setVolume(e) {
+  let clickX = e.offsetX;
+  let width = this.clientWidth;
+  if (clickX < 5) {
+    toggleVolume = false;
+    soundVolumeBar.style.width = 0;
+    audio.volume = 0;
+    soundImage.src = "./assets/img/sound/soundIsOff.svg";
+    return;
+  } else if (toggleVolume === false) {
+    toggleVolume = true;
+    soundImage.src = "./assets/img/sound/soundIsOn.svg";
+  }
+  audio.volume = clickX / width;
+  soundVolumeBar.style.width = `${(clickX / width) * 100}% `;
+}
+
+soundProgressContainer.addEventListener("click", setVolume);
+
+let soundImage = document.querySelector(".sound__image");
+
+soundImage.addEventListener("click", (e) => {
+  changeSoundImg();
+  if (toggleVolume) {
+    toggleVolume = false;
+    soundVolumeBar.style.width = 0;
+    audio.volume = 0;
+  } else {
+    toggleVolume = true;
+    soundVolumeBar.style.width = `50%`;
+    audio.volume = 0.5;
+  }
+});
+
+function changeSoundImg() {
+  toggleVolume
+    ? (soundImage.src = "./assets/img/sound/soundIsOff.svg")
+    : (soundImage.src = "./assets/img/sound/soundIsOn.svg");
+}
+
+// отображение времени воспроизвдения
+let timeShow = document.querySelector(".time-show");
+let minutes = 0;
+
+let timerTrack = setTimeout(function tickTrackTime() {
+  minutes = Math.floor(audio.currentTime / 60);
+  timeShow.textContent = `${
+    String(minutes).padStart(2, "0") || "00"
+  } : ${String(Math.floor(audio.currentTime % 60)).padStart(2, "0")}`;
+  timerId = setTimeout(tickTrackTime, 1000); // (*)
+}, 1000);
+
+// переключение треков по завершении проигрывания
+
+audio.addEventListener("ended", () => {
+  playNow += 1;
+  if (playNow >= audioObj.length) {
+    playNow = 0;
+  }
+  changeCurrentTrack();
+  document.querySelector(".item-active").classList.remove("item-active");
+  tracksInList[playNow].classList.add("item-active");
+  if (isPlay) {
+    let trackToPlay = audioObj[playNow].src;
+    audio.src = `${trackToPlay}`;
+    audio.play();
+  } else if (!isPlay) {
+    isPlay = true;
+    playBtn.classList.toggle("pause");
+    let trackToPlay = audioObj[playNow].src;
+    audio.src = `${trackToPlay}`;
+    audio.play();
+  }
+});
