@@ -164,7 +164,7 @@ function setBg() {
   timeOfDay = getTimeOfDay();
   getRandomNum();
   strBgNum = String(randomNum).padStart(2, "0");
-  body.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${strBgNum}.jpg')`;
+  body.style.backgroundImage = `url('https://raw.githubusercontent.com/dosjcq/stage1-tasks/assets/images/${timeOfDay}/${strBgNum}.jpg')`;
 }
 setBg();
 
