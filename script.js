@@ -21,11 +21,7 @@ const quote = document.querySelector(".quote");
 const author = document.querySelector(".author");
 let quotesArr;
 const quoteChange = document.querySelector(".change-quote");
-// let isPlay = false;
-// const play = document.querySelector(".play");
-// let playNum = 0;
-// const audioNext = document.querySelector(".play-next");
-// const audioPrev = document.querySelector(".play-prev");
+
 const toggleSettingsVisibility = document.querySelector(".settings-on");
 const settingsMenu = document.querySelector(".settings");
 const settingsChooseLanguage = document.querySelector(".choose-language");
@@ -33,40 +29,6 @@ const settingsChooseBackground = document.querySelector(".choose-bg");
 const settingsChooseBlock = document.querySelector(".choose-blocks");
 const settingsQueryForBack = document.querySelector(".query-for-back");
 const settingsHideBlocksArr = document.querySelectorAll(".hideOneBlock");
-console.log("settingsHideBlocksArr: ", settingsHideBlocksArr);
-
-// const playList = [
-//   {
-//     title: "Aqua Caelestis",
-//     src: "../assets/sounds/Aqua Caelestis.mp3",
-//     duration: "00:58",
-//   },
-//   {
-//     title: "River Flows In You",
-//     src: "../assets/sounds/River Flows In You.mp3",
-//     duration: "03:50",
-//   },
-//   {
-//     title: "Ennio Morricone",
-//     src: "../assets/sounds/Ennio Morricone.mp3",
-//     duration: "01:37",
-//   },
-//   {
-//     title: "Summer Wind",
-//     src: "../assets/sounds/Summer Wind.mp3",
-//     duration: "01:50",
-//   },
-// ];
-// const li = document.createElement("li");
-// const playListContainer = document.querySelector(".play-list");
-
-// Записываем в ul.play-list названия песен, которые есть
-// playList.forEach((el) => {
-//   let li = document.createElement("li");
-//   li.classList.add("play-item");
-//   li.textContent = el.title;
-//   playListContainer.append(li);
-// });
 
 let lang = "en-En";
 let currentQuoteNum;
@@ -760,3 +722,21 @@ audio.addEventListener("ended", () => {
     audio.play();
   }
 });
+
+console.log("Часы и календарь +15 Выполнено");
+console.log("Приветствие +10 Выполнено");
+console.log("Смена фонового изображения +20 Выполнено");
+console.log("Виджет погоды +15 Выполнено");
+console.log("Виджет цитата дня +10 Выполнено");
+console.log("Аудиоплеер +15");
+console.log(
+  "Продвинутый аудиоплеер (реализуется без использования библиотек) +17 Не выполнено: можно запустить и остановить проигрывания трека кликом по кнопке Play/Pause рядом с ним в плейлисте +3"
+);
+console.log("Перевод приложения на два языка (en/ru или en/be) +15 Выполнено");
+console.log(
+  "Получение фонового изображения от API +10 Выполнено( можно брать из 2 источников)"
+);
+console.log(
+  "Настройки приложения +15 Не выполнено: настройки приложения сохраняются при перезагрузке страницы +5 "
+);
+console.log("Дополнительный функционал на выбор +0");
