@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="assets/favicon.ico" rel="shortcut icon" />
+    <link rel="stylesheet" href="css/owfont-regular.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>momentum</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="player">
+        <div class="player-controls">
+          <button class="play-prev player-icon"></button>
+          <button class="play player-icon play-big"></button>
+          <button class="play-next player-icon"></button>
+          <div class="time-show">00 : 00</div>
+        </div>
+        <div class="sound">
+          <div class="sound__image-container">
+            <img class="sound__image" src="./assets/img/sound/soundIsOn.svg" />
+          </div>
+          <div class="sound__progress-container">
+            <div class="sound__volume"></div>
+          </div>
+        </div>
+        <div class="player__currentTrack"></div>
+        <div class="player__progress-contaner">
+          <div class="player__progress"></div>
+        </div>
+        <ul class="play-list"></ul>
+      </div>
+      <div class="weather">
+        <input type="text" class="city" value="Minsk" />
+        <i class="weather-icon owf"></i>
+        <div class="weather-error"></div>
+        <div class="description-container">
+          <span class="temperature"></span>
+          <span class="weather-description"></span>
+        </div>
+        <div class="wind"></div>
+        <div class="humidity"></div>
+      </div>
+    </header>
+    <main class="main">
+      <div class="slider-icons">
+        <button class="slide-prev slider-icon"></button>
+        <button class="slide-next slider-icon"></button>
+      </div>
+      <time class="time"></time>
+      <date class="date"></date>
+      <div class="greeting-container">
+        <span class="greeting"></span>
+        <input type="text" class="name" placeholder="[Enter name]" />
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="settings">
+        <div class="settings-menu">
+          <div class="lang-chooser">
+            <p class="choose-language"></p>
+            <input
+              type="radio"
+              id="ruLang"
+              name="lang"
+              value="ru"
+              onchange="translateApp(this.value)"
+            />
+            <label for="ruLang">Русский</label>
+            <input
+              type="radio"
+              id="enLang"
+              name="lang"
+              value="en"
+              onchange="translateApp(this.value)"
+              checked
+            />
+            <label for="enLang">English</label>
+          </div>
+          <div class="bg-chooser">
+            <p class="choose-bg"></p>
+            <input
+              type="radio"
+              id="gitBg"
+              name="backGround"
+              value="git"
+              onchange="setBg(this.value), hideThemePhotoInput()"
+              checked
+            />
+            <label for="gitBg">GitHub</label>
+            <input
+              type="radio"
+              id="flickrBg"
+              name="backGround"
+              value="flickr"
+              onchange="getLinkToImageFlickr(this.value), showThemePhotoInput()"
+            />
+            <label for="flickrBg">Flickr</label>
+            <input
+              type="radio"
+              id="unsplashBg"
+              name="backGround"
+              value="unsplash"
+              onchange="getLinkToImageUnsplash(this.value), showThemePhotoInput()"
+            />
+            <label for="unsplashBg">Unsplash</label>
+            <div class="choose-photo-theme">
+              <p class="query-for-back"></p>
+              <input type="text" onchange="addBgTheme(this.value)" />
+            </div>
+          </div>
+          <div class="choose-block-hide">
+            <p class="choose-blocks"></p>
+            <div>
+              <input
+                type="checkbox"
+                id="hideTime"
+                name="hideTime"
+                onchange="toggleTimeVisibility()"
+              />
+              <label class="hideOneBlock" for="hideTime"></label>
+            </div>
+
+            <div>
+              <input
+                type="checkbox"
+                id="hideDate"
+                name="hideDate"
+                onchange="toggleDateVisibility()"
+              />
+              <label class="hideOneBlock" for="hideDate"></label>
+            </div>
+
+            <div>
+              <input
+                type="checkbox"
+                id="hideGreeting"
+                name="hideGreeting"
+                onchange="toggleGreetingVisibility()"
+              />
+              <label class="hideOneBlock" for="hideGreeting"
+                >Hide Greeting</label
+              >
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="hideWeather"
+                name="hideWeather"
+                onchange="toggleWeatherVisibility()"
+              />
+              <label class="hideOneBlock" for="hideWeather"></label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="hidePlayer"
+                name="hidePlaye"
+                onchange="togglePlayerVisibility()"
+              />
+              <label class="hideOneBlock" for="hidePlaye"></label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="hideTodo"
+                name="hideTodo"
+                onchange="toggleTodoVisibility()"
+              />
+              <label class="hideOneBlock" for="hideTodo"></label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="hideQuotes"
+                name="hideQuotes"
+                onchange="toggleQuotesVisibility()"
+              />
+              <label class="hideOneBlock" for="hideQuotes"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img class="settings-on" src="./assets/svg/settings.svg" alt="" />
+      <div class="quotes">
+        <button class="change-quote"></button>
+        <div>
+          <div class="quote"></div>
+          <div class="author"></div>
+        </div>
+      </div>
+      <div class="todo">
+        <div>
+          <p>ToDo</p>
+        </div>
+      </div>
+    </footer>
+    <script src="./script.js"></script>
+    <!-- <script src="./playlist.js"></script> -->
+  </body>
+</html>
